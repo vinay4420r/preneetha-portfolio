@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praneetha Padala | Portfolio</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script>
+    // Navigation and scroll handling
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = ['home', 'about', 'education', 'skills', 'achievements'];
+      let activeSection = 'home';
+      
+      // Handle scroll for active section
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach(section => {
+          const element = document.getElementById(section);
+          if (!element) return;
+          
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+          }
+        });
+      });
+
+      // Set active section in navigation
+      function setActiveSection(section) {
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+          link.parentElement.classList.remove('active');
+          if (link.getAttribute('href') === `#${section}`) {
+            link.parentElement.classList.add('active');
+          }
+        });
+      }
+
+      // Mobile menu toggle
+      const menuButton = document.querySelector('.menu-button');
+      const navMenu = document.querySelector('.nav-menu');
+      const menuIcon = document.querySelector('.menu-icon');
+      
+      menuButton.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+        menuIcon.classList.toggle('open');
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const section = document.querySelector(this.getAttribute('href'));
+          if (section) {
+            section.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+          navMenu.classList.remove('open');
+          menuIcon.classList.remove('open');
+        });
+      });
+
+      // Animate skill bars on scroll
+      const skillBars = document.querySelectorAll('.skill-progress');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.width = entry.target.dataset.progress;
+          }
+        });
+      }, { threshold: 0.5 });
+
+      skillBars.forEach(bar => observer.observe(bar));
+
+      // Animate sections on scroll
+      document.querySelectorAll('.animate-on-scroll').forEach(element => {
+        const scrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              element.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        scrollObserver.observe(element);
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">
+        <a href="#home">Praneetha</a>
+      </div>
+      <div class="menu-button">
+        <div class="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <ul>
+          <li class="active"><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content animate-on-scroll">
+          <h1>Praneetha Bala Sree Padala</h1>
+          <h2>B.Com Computer Applications Student</h2>
+          <p>Passionate about accounting, finance, and technology</p>
+          <div class="hero-buttons">
+            <a href="#about" class="button">Learn More</a>
+            <a href="#contact" class="button secondary">Get In Touch</a>
+          </div>
+        </div>
+        <div class="hero-image animate-on-scroll">
+          <div class="profile-image">
+            <img src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Professional Profile">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="section-title animate-on-scroll">
+          <h2>About Me</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="about-content">
+          <div class="about-text animate-on-scroll">
+            <p>I am a motivated third-semester B.Com Computer Applications student at Aditya Degree College Kakinada, affiliated with Adikavi Namaya University. Currently maintaining a 9.0 GPA (2024-2027), I am eager to apply my academic knowledge in a professional setting.</p>
+            <p>I am seeking internship or job opportunities to gain real-world experience with a reputable organization where I can contribute to organizational success through my strong work ethic and academic background.</p>
+            <p>My interests include reading books, learning languages, and motivating myself and others. I believe in continuous learning and personal growth, which drives me to seek new challenges and opportunities.</p>
+          </div>
+          <div class="about-info animate-on-scroll">
+            <div class="info-item">
+              <span class="info-title">Name:</span>
+              <span class="info-value">Praneetha Bala Sree Padala</span>
+            </div>
+            <div class="info-item">
+              <span class="info-title">Email:</span>
+              <span class="info-value">praneetha05062006@gmail.com</span>
+            </div>
+            <div class="info-item">
+              <span class="info-title">Phone:</span>
+              <span class="info-value">9949334197</span>
+            </div>
+            <div class="info-item">
+              <span class="info-title">Location:</span>
+              <span class="info-value">East Godavari, Andhra Pradesh</span>
+            </div>
+            <div class="info-item">
+              <span class="info-title">Languages:</span>
+              <span class="info-value">English, Telugu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="education-section">
+      <div class="container">
+        <div class="section-title animate-on-scroll">
+          <h2>My Education</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-content">
+              <h3>B.Com Computer Applications</h3>
+              <h4>Aditya Degree College Kakinada</h4>
+              <p class="university">Adikavi Namaya University</p>
+              <div class="timeline-info">
+                <span class="year">2024-2027</span>
+                <span class="score">9.0 GPA (Current)</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-content">
+              <h3>Intermediate</h3>
+              <h4>Aditya Junior College Kakinada</h4>
+              <div class="timeline-info">
+                <span class="year">2022-2024</span>
+                <span class="score">72%</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item animate-on-scroll">
+            <div class="timeline-content">
+              <h3>SSC</h3>
+              <h4>Sri Chaitanya International Boon School Kakinada</h4>
+              <div class="timeline-info">
+                <span class="year">2022</span>
+                <span class="score">69%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="skills-section">
+      <div class="container">
+        <div class="section-title animate-on-scroll">
+          <h2>My Skills</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="skills-container">
+          <div class="skills-category animate-on-scroll">
+            <h3>Technical Skills</h3>
+            <div class="skills-list">
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Accounting</span>
+                  <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="80%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Finance</span>
+                  <span class="skill-percentage">75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="75%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Microsoft Word</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="85%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Microsoft Excel</span>
+                  <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="80%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Microsoft PowerPoint</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="skills-category animate-on-scroll">
+            <h3>Soft Skills</h3>
+            <div class="skills-list">
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Communication</span>
+                  <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="85%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Teamwork</span>
+                  <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="80%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Critical Thinking</span>
+                  <span class="skill-percentage">75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="75%"></div>
+                </div>
+              </div>
+              <div class="skill">
+                <div class="skill-info">
+                  <span class="skill-name">Time Management</span>
+                  <span class="skill-percentage">80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-progress="80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="language-section animate-on-scroll">
+          <h3>Languages</h3>
+          <div class="languages">
+            <div class="language">
+              <div class="language-circle">
+                <div class="language-progress" data-progress="90"></div>
+                <div class="language-percent">90%</div>
+              </div>
+              <h4>English</h4>
+            </div>
+            <div class="language">
+              <div class="language-circle">
+                <div class="language-progress" data-progress="95"></div>
+                <div class="language-percent">95%</div>
+              </div>
+              <h4>Telugu</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="achievements-section">
+      <div class="container">
+        <div class="section-title animate-on-scroll">
+          <h2>Achievements</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="achievements-grid">
+          <div class="achievement-card animate-on-scroll">
+            <div class="achievement-icon">🏆</div>
+            <h3>ADHOC Company's HACKATHON</h3>
+            <p>Participated in ADHOC Company's HACKATHON, demonstrating problem-solving and coding skills in a competitive environment.</p>
+          </div>
+          <div class="achievement-card animate-on-scroll">
+            <div class="achievement-icon">🎓</div>
+            <h3>Pearson-MEPRO Program</h3>
+            <p>Successfully completed the Pearson-MEPRO program, enhancing professional development and industry-relevant skills.</p>
+          </div>
+          <div class="achievement-card animate-on-scroll">
+            <div class="achievement-icon">📊</div>
+            <h3>Microsoft Excel Project</h3>
+            <p>Completed Coursera's Introduction to Microsoft Excel project, gaining proficiency in data analysis and spreadsheet management.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <div class="section-title animate-on-scroll">
+          <h2>Contact Me</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="contact-container">
+          <div class="contact-info animate-on-scroll">
+            <div class="contact-item">
+              <div class="contact-icon">📞</div>
+              <div class="contact-text">
+                <h3>Phone</h3>
+                <p>9949334197</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div class="contact-text">
+                <h3>Email</h3>
+                <p>praneetha05062006@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-text">
+                <h3>Address</h3>
+                <p>D.no: 2-126/3, Basivi Reddy Street, Pedapudi Mandalam, G. Mamidada, East Godavari, Andhra Pradesh - 533344</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-map animate-on-scroll">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243988.43365777524!2d82.04901754999999!3d16.959539400000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3827ddcce52383%3A0x2347a8ecf97ec583!2sEast%20Godavari%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1697562342806!5m2!1sen!2sin"
+              width="100%"
+              height="300"
+              style="border: 0; border-radius: 8px;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Praneetha Bala Sree Padala. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://wa.me/919949334197" target="_blank" aria-label="WhatsApp">
+            <i class="social-icon">📱</i>
+          </a>
+          <a href="mailto:praneetha05062006@gmail.com" aria-label="Email">
+            <i class="social-icon">✉️</i>
+          </a>
+          <a href="https://www.linkedin.com/in/praneetha-padala" target="_blank" aria-label="LinkedIn">
+            <i class="social-icon">💼</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
